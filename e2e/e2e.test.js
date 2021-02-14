@@ -34,7 +34,25 @@ describe('Credit Card Validator form', () => {
     server.kill();
   });
 
-  test('should add do something', async () => {
+  test('checking valid code', async () => {
     await page.goto(baseUrl);
+    const form = await page.$('form');
+    const input = await page.$('input');
+    const button = await form.$('button');
+    await input.type('4276864025488162');
+    await button.click();
+    const result = await page.evaluate(() => document.getElementById('result').textContent);
+    await expect(result).toBe('Valid');
+  });
+
+  test('checking non-valid code', async () => {
+    await page.goto(baseUrl);
+    const form = await page.$('form');
+    const input = await page.$('input');
+    const button = await form.$('button');
+    await input.type('213467589');
+    await button.click();
+    const result = await page.evaluate(() => document.getElementById('result').textContent);
+    await expect(result).toBe('Not valid');
   });
 });
