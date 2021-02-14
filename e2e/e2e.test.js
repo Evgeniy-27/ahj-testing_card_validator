@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import puppetteer from 'puppeteer';
 import { fork } from 'child_process';
 
